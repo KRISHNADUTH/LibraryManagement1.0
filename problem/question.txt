@@ -1,0 +1,101 @@
+### Problem Statement
+ 
+#### Project: Online Library Management System
+ 
+**Objective**: Develop a secure Online Library Management System using Spring Boot that includes user authentication, authorization, and secure handling of CSRF/XSRF tokens. The system should manage different types of users (admin, librarians, and readers) and their interactions with books and authors.
+ 
+### Requirements
+ 
+1. **User Management**
+    - Implement JWT token authentication for user login.
+    - Ensure users can log in and receive a JWT token.
+    - Different user roles: Admin, Librarian, Reader.
+    - Use Spring Security to protect endpoints based on user roles.
+    - Handle XSRF tokens for non-RESTful operations.
+ 
+2. **Book and Author Management**
+    - Admin and Librarian can add, update, and delete books and authors.
+    - Readers can only view books and authors.
+    - Implement bidirectional and unidirectional mappings:
+        - Each book must have one author (Many-to-One relationship).
+        - Each author can have multiple books (One-to-Many relationship).
+        - Keep track of which readers have borrowed which books (Many-to-Many relationship).
+ 
+3. **Endpoints**
+    - **User Endpoints**:
+        - `/register` (POST): Register a new user (publicly accessible).
+        - `/login` (POST): Authenticate a user and return a JWT token (publicly accessible).
+        - `/profile` (GET): Get user profile details (accessible to all authenticated users).
+ 
+    - **Book Endpoints**:
+        - `/books` (GET): List all books (accessible to all users).
+        - `/books` (POST): Add a new book (accessible to Admin and Librarian).
+        - `/books/{id}` (PUT): Update book details (accessible to Admin and Librarian).
+        - `/books/{id}` (DELETE): Delete a book (accessible to Admin and Librarian).
+ 
+    - **Author Endpoints**:
+        - `/authors` (GET): List all authors (accessible to all users).
+        - `/authors` (POST): Add a new author (accessible to Admin and Librarian).
+        - `/authors/{id}` (PUT): Update author details (accessible to Admin and Librarian).
+        - `/authors/{id}` (DELETE): Delete an author (accessible to Admin and Librarian).
+ 
+    - **Borrowing Endpoints**:
+        - `/borrow` (POST): Borrow a book (accessible to Readers).
+        - `/return` (POST): Return a borrowed book (accessible to Readers).
+        - `/borrowed` (GET): List all borrowed books by the authenticated reader (accessible to Readers).
+ 
+### Implementation Steps
+ 
+1. **Set Up Spring Boot Project**
+    - Initialize a new Spring Boot project with necessary dependencies: Spring Web, Spring Security, Spring Data JPA, and JWT.
+ 
+2. **Configure Spring Security**
+    - Set up roles and authorities.
+    - Configure JWT token generation and validation.
+    - Implement authentication and authorization mechanisms.
+ 
+3. **XSRF Token Handling**
+    - Enable XSRF protection in Spring Security configuration.
+    - Ensure proper handling of XSRF tokens for state-changing operations.
+ 
+4. **Entity Relationships**
+    - Define `User`, `Book`, `Author`, and `Borrowing` entities.
+    - Implement bidirectional and unidirectional mappings between entities.
+ 
+5. **Repository and Service Layers**
+    - Create repositories for `User`, `Book`, `Author`, and `Borrowing`.
+    - Implement service layers to handle business logic.
+ 
+6. **Controller Layer**
+    - Create controllers for user authentication and authorization.
+    - Create controllers for managing books and authors.
+    - Implement endpoints for borrowing and returning books.
+ 
+7. **Testing**
+    - Write unit tests and integration tests to ensure the correctness of the implementation.
+    - Test security configurations and endpoint access based on user roles.
+ 
+### Bonus Features (Optional)
+ 
+- Implement pagination and sorting for listing books and authors.
+- Add search functionality for books by title or author.
+- Implement email notifications for overdue books.
+- Integrate with a frontend framework (like Angular or React) to create a user-friendly interface.
+ 
+### Example Use Cases
+ 
+1. **Admin**
+    - Registers a new librarian.
+    - Adds a new author and a book.
+    - Deletes an outdated book.
+ 
+2. **Librarian**
+    - Updates the details of an existing book.
+    - Views the list of all books and authors.
+ 
+3. **Reader**
+    - Registers and logs in to the system.
+    - Borrows a book and returns it after reading.
+    - Views the list of all available books and authors.
+ 
+By working through this problem statement, you'll be able to practice and reinforce your understanding of Spring Security, JWT authentication, XSRF token handling, and advanced mappings in a real-world application context.
