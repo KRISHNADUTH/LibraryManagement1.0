@@ -99,3 +99,36 @@
     - Views the list of all available books and authors.
  
 By working through this problem statement, you'll be able to practice and reinforce your understanding of Spring Security, JWT authentication, XSRF token handling, and advanced mappings in a real-world application context.
+
+User Model
+id: Unique identifier for the user (Long).
+username: Username for the user's login (String).
+password: Password for the user's login (String).
+email: Email address of the user (String).
+role: Role of the user (Enum: ADMIN, LIBRARIAN, READER).
+borrowedBooks: Set of books borrowed by the user (Set<Book>).
+
+
+Book Model
+id: Unique identifier for the book (Long).
+title: Title of the book (String).
+isbn: ISBN number of the book (String).
+summary: Summary or description of the book (String).
+isBorrowed: Status indicating if the book is borrowed (boolean).
+author: Author of the book (Author).
+borrowers: Set of users who have borrowed the book (Set<User>).
+
+
+Author Model
+id: Unique identifier for the author (Long).
+name: Name of the author (String).
+biography: Biography or background of the author (String).
+books: List of books written by the author (List<Book>).
+
+
+Borrowing Model
+id: Unique identifier for the borrowing record (Long).
+user: User who borrowed the book (User).
+book: Book that is borrowed (Book).
+borrowDate: Date when the book was borrowed (LocalDate).
+returnDate: Date when the book was returned (LocalDate).
